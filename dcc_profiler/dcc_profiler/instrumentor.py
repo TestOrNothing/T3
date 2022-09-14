@@ -1,9 +1,11 @@
 from ast import *
+from pyclbr import Class
 import threading
 from multiprocessing.dummy import Array
 import os
 
 class Instrumentor(NodeTransformer):
+
     def visit_FunctionDef(self, node: FunctionDef):
         transformedNode = NodeTransformer.generic_visit(self, node)
         injected_code = 'Profile.record(\''+ transformedNode.name+'\',['
@@ -50,10 +52,11 @@ class Profile:
     def __init__(self):
         self.functions_called={}
     def ins_record(self, cls, functionName, args):
-        if functionName not in self.functions_called.keys():   
-            self.functions_called[functionName] = [args[0]]
-        else:
-            self.functions_called[functionName].append(args[0])
+        if not str(type(args[0])).split('.')[0] == "<class '__main__":
+            if functionName not in self.functions_called.keys():   
+                self.functions_called[functionName] = [args[0]]
+            else:
+                self.functions_called[functionName].append(args[0])
 
     def printReport(self):
         print("-- executed methods --")
@@ -63,8 +66,9 @@ class Profile:
             for i in self.functions_called[fun]:
                 if i != initial:
                     modify = False
+                    break
             if modify:
-                print(fun, initial)
+                print(fun, "--", initial)
 
     
 def instrument(ast):
