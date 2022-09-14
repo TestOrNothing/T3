@@ -1,16 +1,18 @@
-import unittest
-from unittest import main
+def ladra_out(word):
+    print(word)
+class Perro():
+    def __init__(self):
+        self.name = "perro"
+        self.color = "negro"
 
-def sum(a,b):
-    return a + b
+    def ladra(self, word):
+        print(word)
 
-def div(a,b):
-    return a/b
+    def ladra2(self, word):
+        ladra_out(word)
 
-class TestSum(unittest.TestCase):
-    def test_sum(self):
-        self.assertEqual(sum(2,3), 5, "Should be 5")
-    def test_sum_tuple(self):
-        self.assertEqual(sum( 3, 7),10 , "Should be 10")
-
-test = unittest.main(exit=False)
+dog = Perro()
+dog.ladra("hola")
+dog.ladra2("hola")
+dog.ladra2("hola")
+dog.ladra2("hola")

@@ -1,22 +1,11 @@
 
 
-def factorial(n):
-    if n <= 0:
-        return 1
-    factorial = 1
-    while n > 0:
-        factorial = factorial * n
-        n -= 1
-    return factorial
+def suma(n):
+    return n + 10
 
-def abs(n):
-    result = n
-    if n < 0:
-        result = result *-1
-    return result
+def mult(n):
+    return n*n
 
-factorial(3)
-factorial(3)
-factorial(3)
-abs(2)
-abs(4)
+for i in range(0, 3):
+    print(suma(i))
+    print(mult(1))
